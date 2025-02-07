@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
 const { Pinecone } = require('@pinecone-database/pinecone');
 const Groq = require('groq-sdk');
 const cors = require('cors');
-
+const path = require("path")
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -98,6 +98,13 @@ const generateEmbeddings = async (text) => {
     return Array(1536).fill(0).map(() => Math.random());
 };
 
+
+app.use(express.static(path.join(__dirname, './frontend/build')));
+
+// Serve the React app for any unmatched routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './frontend/build', 'index.html'));
+});
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
