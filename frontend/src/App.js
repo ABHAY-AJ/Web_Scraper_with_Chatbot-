@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
 
-  const api = "http://localhost:5000"
+  const api = "https://web-scraper-with-chatbot.onrender.com"
     const [url, setUrl] = useState('');
     const [query, setQuery] = useState('');
     const [response, setResponse] = useState('');
